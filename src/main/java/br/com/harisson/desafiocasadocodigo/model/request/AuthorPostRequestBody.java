@@ -23,6 +23,10 @@ public class AuthorPostRequestBody {
         this.description = description;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public Author toAuthor() {
         return new Author(this.name, this.email, this.description);
     }
