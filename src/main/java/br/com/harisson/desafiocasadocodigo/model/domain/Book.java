@@ -1,7 +1,9 @@
 package br.com.harisson.desafiocasadocodigo.model.domain;
 
+import br.com.harisson.desafiocasadocodigo.model.response.BookDetailsGetResponseBody;
 import br.com.harisson.desafiocasadocodigo.model.response.BookGetResponseBody;
 import br.com.harisson.desafiocasadocodigo.model.response.BookPostResponseBody;
+import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -67,5 +69,9 @@ public class Book {
 
     public BookGetResponseBody toBookGetResponseBody(){
         return new BookGetResponseBody(this.id, this.title);
+    }
+
+    public BookDetailsGetResponseBody toBookDetailsGetResponseBody() {
+        return new BookDetailsGetResponseBody(this.title, this.price, this.introduction, this.author.getName(), this.author.getDescription(), this.pages, this.isbn);
     }
 }
