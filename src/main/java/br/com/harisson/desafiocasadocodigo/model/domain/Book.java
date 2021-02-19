@@ -1,5 +1,6 @@
 package br.com.harisson.desafiocasadocodigo.model.domain;
 
+import br.com.harisson.desafiocasadocodigo.model.response.BookGetResponseBody;
 import br.com.harisson.desafiocasadocodigo.model.response.BookPostResponseBody;
 
 import javax.persistence.*;
@@ -62,5 +63,9 @@ public class Book {
 
     public BookPostResponseBody toBookPostResponseBody() {
         return new BookPostResponseBody(this.title, this.price, this.pages, this.publicationDate, this.author.getName(), this.category.getName());
+    }
+
+    public BookGetResponseBody toBookGetResponseBody(){
+        return new BookGetResponseBody(this.id, this.title);
     }
 }
