@@ -13,7 +13,7 @@ public class AuthorPostRequestBody {
     private final String name;
     @NotBlank(message = "The field 'email' is mandatory")
     @Email
-    @UniqueValue(domainClass = Author.class, fieldName = "email")
+    @UniqueValue(domainClass = Author.class, fieldName = "email", message = "The field 'email' must be unique")
     private final String email;
     @NotBlank(message = "The field 'description' is mandatory")
     @Size(max = 400, message = "The field 'description' has a maximum length of 400 characters")

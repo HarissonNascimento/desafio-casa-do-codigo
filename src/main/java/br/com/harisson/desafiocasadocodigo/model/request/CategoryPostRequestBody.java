@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class CategoryPostRequestBody {
 
     @NotBlank(message = "The field 'name' is mandatory")
-    @UniqueValue(domainClass = Category.class, fieldName = "name")
+    @UniqueValue(domainClass = Category.class, fieldName = "name", message = "The field 'name' must be unique")
     private String name;
 
     public void setName(String name) {
