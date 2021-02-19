@@ -40,7 +40,6 @@ public class BookController {
     }
 
     @GetMapping("/details/{id}")
-    @Transactional
     public ResponseEntity<BookDetailsGetResponseBody> bookDetails(@PathVariable Long id){
         Book book = Optional.ofNullable(entityManager.find(Book.class, id))
                 .orElseThrow(() -> new NotFoundException("Book is not found!"));
