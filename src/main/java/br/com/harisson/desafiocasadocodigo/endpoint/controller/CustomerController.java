@@ -1,8 +1,8 @@
 package br.com.harisson.desafiocasadocodigo.endpoint.controller;
 
-import br.com.harisson.desafiocasadocodigo.model.domain.Author;
-import br.com.harisson.desafiocasadocodigo.model.request.AuthorPostRequestBody;
-import br.com.harisson.desafiocasadocodigo.model.response.AuthorPostResponseBody;
+import br.com.harisson.desafiocasadocodigo.model.domain.Customer;
+import br.com.harisson.desafiocasadocodigo.model.request.CustomerPostRequestBody;
+import br.com.harisson.desafiocasadocodigo.model.response.CustomerPostResponseBody;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +14,17 @@ import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/author")
-public class AuthorController {
+@RequestMapping("/customer")
+public class CustomerController {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @PostMapping("/register-new")
     @Transactional
-    public AuthorPostResponseBody createNewAuthor(@RequestBody @Valid AuthorPostRequestBody authorPostRequestBody) {
-        Author author = authorPostRequestBody.toAuthor();
-        entityManager.persist(author);
-        return author.toAuthorPostResponseBody();
+    public CustomerPostResponseBody createNewCustomer(@RequestBody @Valid CustomerPostRequestBody customerPostRequestBody){
+        Customer customer = customerPostRequestBody.toCustomer(entityManager);
+        entityManager.persist(customer);
+        return customer.toCustomerPostResponseBody();
     }
 }

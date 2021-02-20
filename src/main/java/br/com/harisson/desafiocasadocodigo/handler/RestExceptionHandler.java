@@ -1,6 +1,7 @@
 package br.com.harisson.desafiocasadocodigo.handler;
 
 import br.com.harisson.desafiocasadocodigo.exception.ExceptionDetails;
+import br.com.harisson.desafiocasadocodigo.exception.notfound.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -32,6 +33,19 @@ public class RestExceptionHandler {
                         fieldMessage
                 ), HttpStatus.BAD_REQUEST
 
+        );
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ExceptionDetails> handlerNotFoundException(NotFoundException nfe) {
+        return new ResponseEntity<>(
+                new ExceptionDetails(
+                        "Not Found",
+                        LocalDateTime.now(),
+                        HttpStatus.NOT_FOUND.value(),
+                        "",
+                        nfe.getMessage()
+                ), HttpStatus.NOT_FOUND
         );
     }
 }

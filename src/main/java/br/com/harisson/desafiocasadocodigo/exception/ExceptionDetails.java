@@ -7,15 +7,15 @@ public class ExceptionDetails {
     private final LocalDateTime timestamp;
     private final int status;
     private final String fields;
-    private final String fieldMessage;
+    private final String message;
 
 
-    public ExceptionDetails(String title, LocalDateTime timestamp, int status, String fields, String fieldMessage) {
+    public ExceptionDetails(String title, LocalDateTime timestamp, int status, String fields, String message) {
         this.title = title;
         this.timestamp = timestamp;
         this.status = status;
         this.fields = fields;
-        this.fieldMessage = fieldMessage;
+        this.message = message;
     }
 
     public String getTitle() {
@@ -34,7 +34,7 @@ public class ExceptionDetails {
         return fields;
     }
 
-    public String getFieldMessage() {
-        return fieldMessage;
+    public String getMessage() {
+        return message;
     }
 }
