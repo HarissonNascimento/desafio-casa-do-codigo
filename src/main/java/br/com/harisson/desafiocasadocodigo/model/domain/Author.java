@@ -5,7 +5,6 @@ import br.com.harisson.desafiocasadocodigo.model.response.AuthorPostResponseBody
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,15 +15,13 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "The field 'name' is mandatory")
+    @Column(nullable = false)
     private String name;
-    @NotBlank(message = "The field 'email' is mandatory")
-    @Email
+    @Column(nullable = false, unique = true)
     private String email;
-    @NotBlank(message = "The field 'description' is mandatory")
-    @Size(max = 400, message = "The field 'description' has a maximum length of 400 characters")
+    @Column(nullable = false, length = 400)
     private String description;
-    @NotNull
+    @Column(nullable = false)
     private final LocalDateTime registrationTime = LocalDateTime.now();
     @OneToMany(mappedBy = "author")
     private List<Book> books;
@@ -43,11 +40,27 @@ public class Author {
         return new AuthorPostResponseBody(this.name, this.email);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public LocalDateTime getRegistrationTime() {
+        return registrationTime;
+    }
+
+    public List<Book> getBooks() {
+        return books;
     }
 }

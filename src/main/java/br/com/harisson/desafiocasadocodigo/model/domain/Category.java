@@ -12,7 +12,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "The field 'name' is mandatory")
+    @Column(nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "category")
     private List<Book> books;
@@ -31,5 +31,9 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public List<Book> getBooks() {
+        return books;
     }
 }

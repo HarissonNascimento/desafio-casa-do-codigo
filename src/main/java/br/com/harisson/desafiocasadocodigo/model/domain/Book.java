@@ -3,7 +3,6 @@ package br.com.harisson.desafiocasadocodigo.model.domain;
 import br.com.harisson.desafiocasadocodigo.model.response.BookDetailsGetResponseBody;
 import br.com.harisson.desafiocasadocodigo.model.response.BookGetResponseBody;
 import br.com.harisson.desafiocasadocodigo.model.response.BookPostResponseBody;
-import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -15,27 +14,23 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "The field 'title' is mandatory")
+    @Column(nullable = false, unique = true)
     private String title;
-    @NotBlank(message = "The field 'introduction' is mandatory")
-    @Size(max = 500)
+    @Column(nullable = false, length = 500)
     private String introduction;
-    @NotNull
+    @Column(nullable = false)
     private String summary;
-    @DecimalMin(value = "20.0", message = "The field 'price' is mandatory and has minimum value of 20.0")
+    @Column(nullable = false)
     private Double price;
-    @Min(value = 100, message = "The minimum number of pages is 100")
-    @NotNull(message = "The field 'pages' is mandatory")
+    @Column(nullable = false)
     private int pages;
-    @NotBlank(message = "The field 'isbn' is mandatory")
+    @Column(nullable = false, unique = true)
     private String isbn;
-    @NotNull(message = "The field 'publicationDate' is mandatory")
+    @Column(nullable = false)
     private LocalDate publicationDate;
-    @NotNull(message = "The field 'category' is mandatory")
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @NotNull(message = "The field 'author' is mandatory")
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
@@ -67,11 +62,51 @@ public class Book {
         return new BookPostResponseBody(this.title, this.price, this.pages, this.publicationDate, this.author.getName(), this.category.getName());
     }
 
-    public BookGetResponseBody toBookGetResponseBody(){
+    public BookGetResponseBody toBookGetResponseBody() {
         return new BookGetResponseBody(this.id, this.title);
     }
 
     public BookDetailsGetResponseBody toBookDetailsGetResponseBody() {
         return new BookDetailsGetResponseBody(this.title, this.price, this.introduction, this.author.getName(), this.author.getDescription(), this.pages, this.isbn);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public LocalDate getPublicationDate() {
+        return publicationDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Author getAuthor() {
+        return author;
     }
 }
